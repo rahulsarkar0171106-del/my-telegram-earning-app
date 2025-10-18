@@ -164,7 +164,7 @@
             <div class="task-card" id="referral-card">
                 <h3>মোট রেফার</h3>
                 <p id="referral-count">0</p>
-                <button onclick="shareReferral()">বন্ধুদের রেফার করুন</button>
+                <button onclick="shareReferral(https://t.me/mynewminer_bot)">বন্ধুদের রেফার করুন</button>
             </div>
         </div>
         
@@ -356,8 +356,8 @@
                 
                 window.Telegram.WebApp.showPopup({
                     title: 'রেফার করুন',
-                    message: `আপনার রেফারেল লিঙ্ক: $ https://t.me/mynewminer_bot}\nলিঙ্কটি কপি করে বন্ধুদের সাথে শেয়ার করুন!`,
-                    buttons: [{ text: 'কপি করুন', id: 'copy' }, { text: 'বন্ধ', id: 'close' }]
+                    message: `আপনার রেফারেল লিঙ্ক: https://t.me/mynewminer_bot\লিঙ্কটি কপি করে বন্ধুদের সাথে শেয়ার করুন!`,
+                    buttons: [{ text: 'কপি করুন', id: 'copy' }, { text: '❌', id: 'close' }]
                 }, function(id) {
                     if (id === 'copy') {
                         navigator.clipboard.writeText(referralLink);
@@ -372,3 +372,4 @@
 </body>
 
 </html>
+
