@@ -200,7 +200,7 @@
             }
         }
         
-        // ⭐ ফাংশন ২: ডেটা CloudStorage-এ সেভ করা (Async) - এখানে পরিবর্তন করা হয়েছে ⭐
+        // ⭐ ফাংশন ২: ডেটা CloudStorage-এ সেভ করা (Async) - ডিবাগিং মেসেজ সহ ⭐
         async function saveData() {
             if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.CloudStorage) {
                 try {
@@ -310,7 +310,8 @@
                     adDoneButton.style.display = 'block'; 
                     
                     if (window.Telegram && window.Telegram.WebApp) {
-                        window.Telegram.WebApp.showAlert(`সফল! আপনার ব্যালেন্সে ${rewardPerAd.toFixed(2)} টাকা যোগ হয়েছে। এখন 'বিজ্ঞাপন দেখা শেষ করুন' বাটনে ক্লিক করুন।`);
+                        // প্রথম মেসেজ
+                        window.Telegram.WebApp.showAlert(`সফল! আপনার ব্যালেন্সে ${rewardPerAd.toFixed(2)} টাকা যোগ হয়েছে। এখন 'বিজ্ঞাপন দেখা শেষ করুন' বাটনে ক্লিক করুন।`); 
                     }
                 }
             }, 1000);
@@ -320,7 +321,7 @@
             adsWatched++;
             userBalance += rewardPerAd;
             
-            saveData(); // ডেটা ক্লাউড স্টোরেজে সংরক্ষণ করুন
+            saveData(); // ডেটা ক্লাউড স্টোরেজে সংরক্ষণ করুন (যা দ্বিতীয় মেসেজটি দেখাবে)
         }
 
         function adFinished() {
