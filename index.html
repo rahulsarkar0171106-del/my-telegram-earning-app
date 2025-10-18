@@ -1,372 +1,410 @@
-<html>
-  <head>
-    <title>Hello, World!</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-      <h1 class="title">Hello World! </h1>
-      <p id="currentTime"></p>
-      <script src="script.js"></script>
-  </body>
-</html><html lang="bn">
+
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমার আর্নিং অ্যাপ</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    
-    <style>
-        body {
-            /* স্ক্রিনশটের মতো ডার্ক ব্যাকগ্রাউন্ড */
-            font-family: sans-serif;
-            background-color: #0d0d10; /* গাঢ় কালো/নীল */
-            color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমার আর্নিং অ্যাপ</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <style>
+        /* সাধারণ ডিজাইন এবং ডার্ক মোড */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d0d10; /* গাঢ় কালো/নীল */
+            color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
 
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
 
-        .balance-card {
-            /* উজ্জ্বল নীল/বেগুনি ব্যালেন্স কার্ড */
-            background: linear-gradient(135deg, #4f31c7, #2c1a85); 
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        /* ব্যালেন্স কার্ডের ডিজাইন */
+        .balance-card {
+            background: linear-gradient(135deg, #4f31c7, #2c1a85); 
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
 
-        .balance-card h2 {
-            margin-top: 0;
-            color: #c0c0c0;
-        }
+        .balance-card h2 {
+            margin: 0 0 10px 0;
+            color: #c0c0c0;
+            font-weight: normal;
+            font-size: 1.1em;
+        }
 
-        .balance-card #current-balance {
-            font-size: 2em;
-            color: #fce300; /* উজ্জ্বল সোনালী */
-            font-weight: bold;
-        }
+        .balance-card #current-balance {
+            font-size: 2.5em;
+            color: #fce300; /* উজ্জ্বল সোনালী */
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
 
-        .task-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+        /* টাস্ক গ্রিড */
+        .task-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
 
-        .task-card {
-            /* গাঢ় কার্ড ব্যাকগ্রাউন্ড */
-            background: #1a1a20; 
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-        }
+        /* টাস্ক কার্ডের ডিজাইন */
+        .task-card {
+            background: #1a1a20; 
+            padding: 20px 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s;
+        }
 
-        .task-card h3 {
-            color: #8888ff; /* হালকা বেগুনি */
-        }
+        .task-card:hover {
+            transform: translateY(-3px);
+        }
 
-        /* বাটন ডিজাইন */
-        .task-card button {
-            background-color: #1a73e8; /* উজ্জ্বল নীল */
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 20px; /* ক্যাপসুল স্টাইল */
-            margin-top: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
+        .task-card h3 {
+            color: #8888ff; /* হালকা বেগুনি */
+            margin-top: 0;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
 
-        .task-card button:hover {
-            background-color: #0f52b0;
-        }
+        /* বাটন ডিজাইন */
+        .task-card button {
+            background-color: #1a73e8; /* উজ্জ্বল নীল */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px; /* ক্যাপসুল স্টাইল */
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background-color 0.3s, opacity 0.3s;
+            width: 100%;
+        }
 
-        /* উইথড্র বাটন */
-        .footer-nav button {
-            width: 100%;
-            padding: 15px;
-            background-color: #e0399d; /* উজ্জ্বল গোলাপী/বেগুনি */
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        .task-card button:hover:not(:disabled) {
+            background-color: #0f52b0;
+        }
 
-        /* যখন বাটন ডিজেবল থাকবে */
-        .task-card button:disabled {
-            background-color: #555;
-            cursor: not-allowed;
-        }
+        .task-card button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
 
-        /* বিজ্ঞাপন ভিউয়ার ওভারলে */
-        .ad-viewer-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000000;
-            z-index: 1000;
-            display: none; /* ডিফল্টভাবে লুকানো থাকবে */
-            flex-direction: column;
-        }
+        /* উইথড্র বাটন */
+        .footer-nav {
+            padding-top: 10px;
+        }
+        
+        .footer-nav button {
+            width: 100%;
+            padding: 18px;
+            background-color: #e0399d; /* উজ্জ্বল গোলাপী/বেগুনি */
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(224, 57, 157, 0.4);
+            transition: background-color 0.3s;
+        }
+        
+        .footer-nav button:hover {
+            background-color: #b02a7a;
+        }
 
-        .ad-header {
-            padding: 10px;
-            background-color: #2b2b2b;
-            color: white;
-            text-align: center;
-            font-size: 1.1em;
-        }
+        /* বিজ্ঞাপন ভিউয়ার ওভারলে */
+        .ad-viewer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            z-index: 1000;
+            display: none; /* ডিফল্টভাবে লুকানো থাকবে */
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
 
-        #ad-frame {
-            flex-grow: 1;
-            width: 100%;
-            border: none;
-        }
+        .ad-header {
+            width: 100%;
+            padding: 15px;
+            background-color: #2b2b2b;
+            color: white;
+            text-align: center;
+            font-size: 1.1em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
 
-        #ad-done-button {
-            width: 90%;
-            margin: 10px auto;
-            padding: 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            cursor: pointer;
-        }
-    </style>
+        #ad-frame {
+            flex-grow: 1;
+            width: 100%;
+            border: none;
+        }
+
+        #ad-done-button {
+            width: 90%;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #4CAF50; /* সবুজ */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        #ad-done-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="balance-card">
-            <h2>ব্যালেন্স:</h2>
-            <p id="current-balance">৫০.০০ Taka 💰</p>
-        </div>
+    <div class="container">
+        <div class="balance-card">
+            <h2>আমার বর্তমান ব্যালেন্স:</h2>
+            <p id="current-balance">৫০.০০ Taka 💰</p>
+        </div>
 
-        <div class="task-grid">
-            <div class="task-card" id="ad-view-card">
-                <h3>দৈনিক বিজ্ঞাপন দেখা</h3>
-                <p id="ad-count">0 / 10</p>
-                <button id="ad-button" onclick="startAdView()">বিজ্ঞাপন দেখুন (৫ টাকা)</button> 
-            </div>
+        <div class="task-grid">
+            <div class="task-card" id="ad-view-card">
+                <h3>দৈনিক বিজ্ঞাপন দেখা</h3>
+                <p id="ad-count">0 / 10</p>
+                <button id="ad-button" onclick="startAdView()">বিজ্ঞাপন দেখুন (৫ টাকা)</button> 
+            </div>
 
-            <div class="task-card" id="referral-card">
-                <h3>মোট রেফার</h3>
-                <p id="referral-count">0</p>
-                <button onclick="shareReferral()">বন্ধুদের রেফার করুন</button>
-            </div>
-        </div>
-        
-        <div class="footer-nav">
-            <button onclick="startWithdrawal()">উইথড্র</button> 
-        </div>
-    </div>
-    
-    <div id="ad-viewer" class="ad-viewer-overlay">
-        <div class="ad-header">
-            বিজ্ঞাপন দেখা হচ্ছে... (<span id="countdown-timer">20</span>s)
-        </div>
-        <iframe id="ad-frame" src="" frameborder="0"></iframe> 
-        <button id="ad-done-button" onclick="adFinished()" style="display:none;">বিজ্ঞাপন দেখা শেষ করুন এবং হোমে ফিরুন</button>
-    </div>
+            <div class="task-card" id="referral-card">
+                <h3>মোট রেফার</h3>
+                <p id="referral-count">0</p>
+                <button onclick="shareReferral()">বন্ধুদের রেফার করুন</button>
+            </div>
+        </div>
+        
+        <div class="footer-nav">
+            <button onclick="startWithdrawal()">টাকা উইথড্র করুন</button> 
+        </div>
+    </div>
+    
+    <div id="ad-viewer" class="ad-viewer-overlay">
+        <div class="ad-header">
+            বিজ্ঞাপন দেখা হচ্ছে... (<span id="countdown-timer">20</span>s)
+        </div>
+        <iframe id="ad-frame" src="" frameborder="0"></iframe> 
+        <button id="ad-done-button" onclick="adFinished()" style="display:none;">বিজ্ঞাপন দেখা শেষ করুন এবং হোমে ফিরুন</button>
+    </div>
 
+    <script>
+        // ভেরিয়েবল ইনিশিয়ালাইজেশন
+        let userBalance = 50.00;
+        let adsWatched = 0;
+        let totalReferrals = 0; // মোট রেফারেল ট্র্যাক করার জন্য যোগ করা হয়েছে
+        const totalAds = 10;
+        const rewardPerAd = 5.00; // প্রতি বিজ্ঞাপনের জন্য ৫ টাকা
+        const minimumWithdrawal = 500.00; // উইথড্র করার জন্য ন্যূনতম ৫০০ টাকা
 
-    <script>
-        // ভেরিয়েবল
-        let userBalance = 50.00;
-        let adsWatched = 0;
-        const totalAds = 10;
-        const rewardPerAd = 5.00; // প্রতি বিজ্ঞাপনের জন্য ৫ টাকা
-        const minimumWithdrawal = 500.00; // উইথড্র করার জন্য ন্যূনতম ৫০০ টাকা
+        let countdownInterval;
+        const adViewer = document.getElementById('ad-viewer');
+        const adFrame = document.getElementById('ad-frame');
+        const adButton = document.getElementById('ad-button');
+        const countdownTimer = document.getElementById('countdown-timer');
+        const adDoneButton = document.getElementById('ad-done-button');
+        const referralCountElement = document.getElementById('referral-count'); // রেফারেল কাউন্ট আপডেট করার জন্য
 
-        let countdownInterval;
-        const adViewer = document.getElementById('ad-viewer');
-        const adFrame = document.getElementById('ad-frame');
-        const adButton = document.getElementById('ad-button');
-        const countdownTimer = document.getElementById('countdown-timer');
-        const adDoneButton = document.getElementById('ad-done-button');
+        // যখন অ্যাপ লোড হবে
+        window.onload = function() {
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.ready();
+                // মেইন বাটন ব্যবহার না করে অ্যাপের বাটন ব্যবহার করা হয়েছে, তবুও এটিকে প্রস্তুত রাখা হলো।
+                // window.Telegram.WebApp.MainButton.setText('হোম');
+                // window.Telegram.WebApp.MainButton.show();
+            }
+            
+            updateUI();
+            showWelcomeNotice(); 
+        };
+        
+        // UI (User Interface) আপডেট করার ফাংশন
+        function updateUI() {
+            document.getElementById('current-balance').innerText = userBalance.toFixed(2) + ' Taka 💰';
+            document.getElementById('ad-count').innerText = `${adsWatched} / ${totalAds}`;
+            referralCountElement.innerText = totalReferrals; // রেফারেল কাউন্ট আপডেট
+            
+            if (adsWatched >= totalAds) {
+                adButton.disabled = true;
+                adButton.innerText = 'আজকের টাস্ক শেষ';
+            } else {
+                adButton.disabled = false;
+                adButton.innerText = 'বিজ্ঞাপন দেখুন (৫ টাকা)';
+            }
+        }
 
-        // যখন অ্যাপ লোড হবে
-        window.onload = function() {
-            if (window.Telegram && window.Telegram.WebApp) {
-                window.Telegram.WebApp.ready();
-                window.Telegram.WebApp.MainButton.setText('হোম');
-                window.Telegram.WebApp.MainButton.show();
-            }
-            
-            updateUI();
-            showWelcomeNotice(); 
-        };
-        
-        // UI (User Interface) আপডেট করার ফাংশন
-        function updateUI() {
-            document.getElementById('current-balance').innerText = userBalance.toFixed(2) + ' Taka 💰';
-            document.getElementById('ad-count').innerText = `${adsWatched} / ${totalAds}`;
-            
-            if (adsWatched >= totalAds) {
-                adButton.disabled = true;
-                adButton.innerText = 'আজকের টাস্ক শেষ';
-            } else {
-                adButton.disabled = false;
-                adButton.innerText = 'বিজ্ঞাপন দেখুন (৫ টাকা)';
-            }
-        }
+        // স্বাগতম নোটিশ তৈরি ও প্রদর্শন (Telegram Popup)
+        function showWelcomeNotice() {
+            const noticeTitle = 'স্বাগতম! 🔥';
+            const noticeMessage = 
+                'আসসালামু আলাইকুম, সততার সাথে পেমেন্ট করছি। নিয়ম মেনে কাজ করলে ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ! 🔥\n\n' +
+                '• জয়েনিং বোনাস: ৫০ টাকা\n' +
+                '• প্রতি রেফারে: ৩০ টাকা\n' +
+                '• প্রতি বিজ্ঞাপনে: ৫ টাকা\n' + 
+                '• প্রতিদিন ১০ টা করে বিজ্ঞাপন দেখার সুযোগ\n' +
+                '\n' +
+                '⚡️ এই সাইটে কোনো ইনভেস্ট করতে হবে না সম্পূর্ণ ফ্রিতে ইনকাম করতে পারবেন। ধন্যবাদ।';
+            
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.showPopup({
+                    title: noticeTitle,
+                    message: noticeMessage,
+                    buttons: [{ text: 'বুঝেছি', id: 'ok' }]
+                });
+            } else {
+                alert(noticeTitle + '\n\n' + noticeMessage);
+            }
+        }
 
-        // স্বাগতম নোটিশ তৈরি ও প্রদর্শন
-        function showWelcomeNotice() {
-            const noticeTitle = 'স্বাগতম! 🔥';
-            const noticeMessage = 
-                'আসসালামু আলাইকুম, সততার সাথে পেমেন্ট করছি। নিয়ম মেনে কাজ করলে ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ! 🔥\n\n' +
-                '• জয়েনিং বোনাস: ৫০ টাকা\n' +
-                '• প্রতি রেফারে: ৩০ টাকা\n' +
-                '• প্রতি বিজ্ঞাপনে: ৫ টাকা\n' + 
-                '• প্রতিদিন ১০ টা করে বিজ্ঞাপন দেখার সুযোগ\n' +
-                '\n' +
-                '⚡️ এই সাইটে কোনো ইনভেস্ট করতে হবে না সম্পূর্ণ ফ্রিতে ইনকাম করতে পারবেন। ধন্যবাদ।';
-            
-            if (window.Telegram && window.Telegram.WebApp) {
-                window.Telegram.WebApp.showPopup({
-                    title: noticeTitle,
-                    message: noticeMessage,
-                    buttons: [{ text: 'বুঝেছি', id: 'ok' }]
-                });
-            } else {
-                alert(noticeTitle + '\n\n' + noticeMessage);
-            }
-        }
+        // বিজ্ঞাপন দেখার প্রক্রিয়া শুরু করার ফাংশন
+        function startAdView() {
+            if (adsWatched >= totalAds) {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    window.Telegram.WebApp.showAlert('দুঃখিত! আজকের জন্য আপনার ১০টি বিজ্ঞাপন দেখা শেষ।');
+                } else {
+                    alert('দুঃখিত! আজকের জন্য আপনার ১০টি বিজ্ঞাপন দেখা শেষ।');
+                }
+                return;
+            }
+            
+            // ডেমো বিজ্ঞাপন লিঙ্ক
+            const adURL = "https://www.effectivegatecpm.com/q7m07sggj?key=0febc73b4772d20c71652935f8240078";
+            
+            adViewer.style.display = 'flex';
+            adFrame.src = adURL;
+            adButton.disabled = true; // মেইন বাটন ডিজেবল
+            
+            let timeRemaining = 20; // বিজ্ঞাপনের সময়কাল (সেকেন্ড)
+            countdownTimer.innerText = timeRemaining;
+            adDoneButton.style.display = 'none';
 
-        // বিজ্ঞাপন দেখার প্রক্রিয়া শুরু করার ফাংশন
-        function startAdView() {
-            if (adsWatched >= totalAds) {
-                if (window.Telegram.WebApp) {
-                     window.Telegram.WebApp.showAlert('দুঃখিত! আজকের জন্য আপনার ১০টি বিজ্ঞাপন দেখা শেষ।');
-                } else {
-                     alert('দুঃখিত! আজকের জন্য আপনার ১০টি বিজ্ঞাপন দেখা শেষ।');
-                }
-                return;
-            }
-            
-            const adURL = "https://www.effectivegatecpm.com/q7m07sggj?key=0febc73b4772d20c71652935f8240078";
-            
-            adViewer.style.display = 'flex';
-            adFrame.src = adURL;
-            adButton.disabled = true;
+            countdownInterval = setInterval(() => {
+                timeRemaining--;
+                countdownTimer.innerText = timeRemaining;
 
-            let timeRemaining = 20;
-            countdownTimer.innerText = timeRemaining;
-            adDoneButton.style.display = 'none';
+                if (timeRemaining <= 0) {
+                    clearInterval(countdownInterval);
+                    
+                    rewardUser(); // টাকা যোগ করুন
+                    
+                    adDoneButton.style.display = 'block'; // বিজ্ঞাপন শেষ করার বাটন দেখান
+                    
+                    if (window.Telegram && window.Telegram.WebApp) {
+                        window.Telegram.WebApp.showAlert(`সফল! আপনার ব্যালেন্সে ${rewardPerAd.toFixed(2)} টাকা যোগ হয়েছে। এখন 'বিজ্ঞাপন দেখা শেষ করুন' বাটনে ক্লিক করুন।`);
+                    }
+                }
+            }, 1000);
+        }
 
-            countdownInterval = setInterval(() => {
-                timeRemaining--;
-                countdownTimer.innerText = timeRemaining;
+        // বিজ্ঞাপন দেখা শেষ হওয়ার পর অ্যাপে ফিরে আসার ফাংশন
+        function adFinished() {
+            adViewer.style.display = 'none';
+            adFrame.src = ''; // iframe খালি করুন
+            updateUI(); // UI আপডেট করুন
+            adButton.disabled = false; // মেইন বাটন এনাবল করুন
+        }
 
-                if (timeRemaining <= 0) {
-                    clearInterval(countdownInterval);
-                    
-                    rewardUser(); 
-                    
-                    adDoneButton.style.display = 'block'; 
-                    
-                    if (window.Telegram.WebApp) {
-                         window.Telegram.WebApp.showAlert(`সফল! আপনার ব্যালেন্সে ${rewardPerAd.toFixed(2)} টাকা যোগ হয়েছে। এখন 'বিজ্ঞাপন দেখা শেষ করুন' বাটনে ক্লিক করুন।`);
-                    }
-                }
-            }, 1000);
-        }
+        // ব্যবহারকারীকে টাকা দেওয়ার ফাংশন
+        function rewardUser() {
+            adsWatched++;
+            userBalance += rewardPerAd;
+        }
 
-        // বিজ্ঞাপন দেখা শেষ হওয়ার পর অ্যাপে ফিরে আসার ফাংশন
-        function adFinished() {
-            adViewer.style.display = 'none';
-            adFrame.src = '';
-            updateUI();
-        }
+        // উইথড্র অপশন শুরু করা
+        function startWithdrawal() {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const tg = window.Telegram.WebApp;
+                
+                if (userBalance < minimumWithdrawal) {
+                    tg.showAlert(`দুঃখিত! উইথড্র করার জন্য আপনার অ্যাকাউন্টে কমপক্ষে ${minimumWithdrawal.toFixed(2)} টাকা থাকতে হবে। আপনার বর্তমান ব্যালেন্স: ${userBalance.toFixed(2)} টাকা।`);
+                    return;
+                }
 
-        // ব্যবহারকারীকে টাকা দেওয়ার ফাংশন
-        function rewardUser() {
-            adsWatched++;
-            userBalance += rewardPerAd;
-        }
+                // পপআপ ১: উইথড্র তথ্য
+                tg.showPopup({
+                    title: 'টাকা তুলুন',
+                    message: `আপনার বর্তমান ব্যালেন্স: ${userBalance.toFixed(2)} টাকা। আপনি কত টাকা তুলতে চান এবং কোন পেমেন্ট পদ্ধতিতে (বিকাশ/নগদ) টাকা নিতে চান, তা নিচের বাটনে ক্লিক করে জানান।`,
+                    buttons: [
+                        { text: 'উইথড্র রিকোয়েস্ট দিন', id: 'request' },
+                        { text: 'বাতিল করুন', id: 'cancel', type: 'destructive' }
+                    ]
+                }, function(id) {
+                    if (id === 'request') {
+                        // পপআপ ২: পেমেন্ট পদ্ধতি নির্বাচন
+                        tg.showPopup({
+                            title: 'পেমেন্ট পদ্ধতি',
+                            message: 'আপনি বিকাশ না নগদ, কোনটির মাধ্যমে টাকা নিতে চান?',
+                            buttons: [
+                                { text: 'বিকাশ', id: 'bKash' },
+                                { text: 'নগদ', id: 'Nagad' }
+                            ]
+                        }, function(method_id) {
+                            if (method_id === 'bKash' || method_id === 'Nagad') {
+                                // পপআপ ৩: রিকোয়েস্ট নিশ্চিতকরণ (নম্বর/পরিমাণ ইনপুট একটি ডেমো পপআপ দিয়ে দেখানো হয়েছে)
+                                tg.showPopup({
+                                    title: `${method_id} নম্বর দিন`,
+                                    message: `আপনার ${method_id} অ্যাকাউন্ট নম্বরটি এবং তোলার পরিমাণ লিখে প্রস্তুত থাকুন।`,
+                                    buttons: [{ text: 'জমা দিন', id: 'submit' }]
+                                }, function(submit_id) {
+                                    if (submit_id === 'submit') {
+                                        // ডেমো: সফল রিকোয়েস্ট বার্তা
+                                        tg.showAlert(`আপনার টাকা তোলার অনুরোধ সফলভাবে জমা দেওয়া হয়েছে। ২৪ ঘন্টার মধ্যে টাকা পেয়ে যাবেন। আপনার নির্বাচিত পদ্ধতি: ${method_id}`);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            } else {
+                alert('উইথড্র অপশন শুধুমাত্র টেলিগ্রাম মিনি অ্যাপের মধ্যে কাজ করে।');
+            }
+        }
 
-        // ⭐ নতুন ফাংশন: উইথড্র অপশন শুরু করা ⭐
-        function startWithdrawal() {
-            if (window.Telegram && window.Telegram.WebApp) {
-                const tg = window.Telegram.WebApp;
-                
-                if (userBalance < minimumWithdrawal) {
-                    tg.showAlert(`দুঃখিত! উইথড্র করার জন্য আপনার অ্যাকাউন্টে কমপক্ষে ${minimumWithdrawal.toFixed(2)} টাকা থাকতে হবে। আপনার বর্তমান ব্যালেন্স: ${userBalance.toFixed(2)} টাকা।`);
-                    return;
-                }
-
-                tg.showPopup({
-                    title: 'টাকা তুলুন',
-                    message: `আপনার বর্তমান ব্যালেন্স: ${userBalance.toFixed(2)} টাকা। আপনি কত টাকা তুলতে চান এবং কোন পেমেন্ট পদ্ধতিতে (বিকাশ/নগদ) টাকা নিতে চান, তা নিচের বাটনে ক্লিক করে জানান।`,
-                    buttons: [
-                        { text: 'উইথড্র রিকোয়েস্ট দিন', id: 'request' },
-                        { text: 'বাতিল করুন', id: 'cancel', type: 'destructive' }
-                    ]
-                }, function(id) {
-                    if (id === 'request') {
-                        // পেমেন্ট পদ্ধতি ইনপুট নেওয়া
-                        tg.showPopup({
-                            title: 'পেমেন্ট পদ্ধতি',
-                            message: 'আপনি বিকাশ না নগদ, কোনটির মাধ্যমে টাকা নিতে চান?',
-                            buttons: [
-                                { text: 'বিকাশ', id: 'bKash' },
-                                { text: 'নগদ', id: 'Nagad' }
-                            ]
-                        }, function(method_id) {
-                            if (method_id === 'bKash' || method_id === 'Nagad') {
-                                // রিকোয়েস্ট নিশ্চিতকরণ
-                                tg.showPopup({
-                                    title: `${method_id} নম্বর দিন`,
-                                    message: `আপনার ${method_id} অ্যাকাউন্ট নম্বরটি এবং তোলার পরিমাণ লিখে প্রস্তুত থাকুন।`,
-                                    buttons: [{ text: 'জমা দিন', id: 'submit' }]
-                                }, function(submit_id) {
-                                    if (submit_id === 'submit') {
-                                        // এটি একটি ডেমো। আসল অ্যাপে এই রিকোয়েস্ট সার্ভারে যাবে।
-                                        tg.showAlert(`আপনার টাকা তোলার অনুরোধ সফলভাবে জমা দেওয়া হয়েছে। ২৪ ঘন্টার মধ্যে টাকা পেয়ে যাবেন। আপনার নির্বাচিত পদ্ধতি: ${method_id}`);
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-            } else {
-                alert('উইথড্র অপশন শুধুমাত্র টেলিগ্রাম মিনি অ্যাপের মধ্যে কাজ করে।');
-            }
-        }
-
-        // রেফারেল লিংক শেয়ার করার ফাংশন
-        function shareReferral() {
-            if (window.Telegram && window.Telegram.WebApp) {
-                const botUsername = window.Telegram.WebApp.initDataUnsafe.user ? window.Telegram.WebApp.initDataUnsafe.user.username : 'your_bot_username'; 
-                const referralLink = `https://t.me/${botUsername}?start=ref_${Math.floor(Math.random() * 10000)}`;
-                
-                window.Telegram.WebApp.showPopup({
-                    title: 'রেফার করুন',
-                    message: `আপনার রেফারেল লিঙ্ক: ${referralLink}\nলিঙ্কটি কপি করে বন্ধুদের সাথে শেয়ার করুন!`,
-                    buttons: [{ text: 'কপি করুন', id: 'copy' }, { text: 'বন্ধ', id: 'close' }]
-                }, function(id) {
-                    if (id === 'copy') {
-                        navigator.clipboard.writeText(referralLink);
-                        window.Telegram.WebApp.showAlert('লিঙ্ক কপি করা হয়েছে!');
-                    }
-                });
-            } else {
-                alert('টেলিগ্রামের বাইরে রেফারেল লিঙ্ক শেয়ার করা যাবে না।');
-            }
-        }
-    </script>
+        // রেফারেল লিংক শেয়ার করার ফাংশন
+        function shareReferral() {
+            if (window.Telegram && window.Telegram.WebApp) {
+                // ইউজার আইডি থাকলে, সঠিক রেফারেল লিঙ্ক তৈরি হবে, না থাকলে ডেমো লিংক।
+                const userId = window.Telegram.WebApp.initDataUnsafe.user ? window.Telegram.WebApp.initDataUnsafe.user.id : 'demo_user';
+                const botUsername = 'your_bot_username'; // আপনার বট এর ইউজারনেম দিন
+                const referralLink = `https://t.me/${botUsername}?start=ref_${userId}`;
+                
+                window.Telegram.WebApp.showPopup({
+                    title: 'রেফার করুন',
+                    message: `আপনার রেফারেল লিঙ্ক: ${referralLink}\nলিঙ্কটি কপি করে বন্ধুদের সাথে শেয়ার করুন!`,
+                    buttons: [{ text: 'কপি করুন', id: 'copy' }, { text: 'বন্ধ', id: 'close' }]
+                }, function(id) {
+                    if (id === 'copy') {
+                        navigator.clipboard.writeText(referralLink);
+                        window.Telegram.WebApp.showAlert('লিঙ্ক কপি করা হয়েছে!');
+                        // ডেমো হিসেবে রেফারেল কাউন্ট বাড়ানো হলো
+                        // totalReferrals++;
+                        // updateUI();
+                    }
+                });
+            } else {
+                alert('টেলিগ্রামের বাইরে রেফারেল লিঙ্ক শেয়ার করা যাবে না।');
+            }
+        }
+    </script>
 </body>
-atar rafer link ti poreboton kore dau
 </html>
