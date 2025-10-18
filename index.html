@@ -349,10 +349,10 @@
         }
 
         // রেফারেল লিংক শেয়ার করার ফাংশন
-        function shareReferral(https://t.me/mynewminer_bot) {
+        function shareReferral() {
             if (window.Telegram && window.Telegram.WebApp) {
                 const botUsername = window.Telegram.WebApp.initDataUnsafe.user ? window.Telegram.WebApp.initDataUnsafe.user.username : 'your_bot_username'; 
-                const referralLink = `https://t.me/${botUsername}?start=ref_${Math.floor(Math.random() * 10000)}`;
+                const referralLink = `https://t.me/${https://t.me/mynewminer_bot}?start=ref_${Math.floor(Math.random() * 10000)}`;
                 
                 window.Telegram.WebApp.showPopup({
                     title: 'রেফার করুন',
@@ -360,7 +360,7 @@
                     buttons: [{ text: 'কপি করুন', id: 'https://t.me/mynewminer_bot' }, { text: '❌', id: 'close' }]
                 }, function(id) {
                     if (id === 'copy') {
-                        navigator.clipboard.writeText(referralLink);
+                        navigator.clipboard.writeText('https://t.me/mynewminer_bot');
                         window.Telegram.WebApp.showAlert('লিঙ্ক কপি করা হয়েছে!');
                     }
                 });
@@ -372,5 +372,6 @@
 </body>
 
 </html>
+
 
 
