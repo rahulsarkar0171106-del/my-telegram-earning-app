@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -199,7 +200,7 @@
             }
         }
         
-        // ফাংশন ২: ডেটা CloudStorage-এ সেভ করা (Async)
+        // ⭐ ফাংশন ২: ডেটা CloudStorage-এ সেভ করা (Async) - এখানে পরিবর্তন করা হয়েছে ⭐
         async function saveData() {
             if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.CloudStorage) {
                 try {
@@ -207,8 +208,11 @@
                         'userBalance': userBalance.toFixed(2).toString(),
                         'adsWatched': adsWatched.toString()
                     });
-                    console.log("ডেটা ক্লাউড স্টোরেজে সফলভাবে সংরক্ষণ করা হয়েছে।");
+                    // ⭐ সফল মেসেজ ⭐
+                    window.Telegram.WebApp.showAlert(`✅ ক্লাউডে ডেটা সেভ হয়েছে! বর্তমান ব্যালেন্স: ${userBalance.toFixed(2)} টাকা।`); 
                 } catch (error) {
+                    // ⭐ ব্যর্থ মেসেজ ⭐
+                    window.Telegram.WebApp.showAlert("❌ ডেটা সেভ করতে সমস্যা! আপনার বট কনফিগারেশন চেক করুন।");
                     console.error("CloudStorage সেভ করতে সমস্যা:", error);
                 }
             }
@@ -227,7 +231,6 @@
                 }
             }
             
-            // ডেটা লোড হওয়ার জন্য অপেক্ষা করা হলো
             await loadData(); 
             
             updateUI();
