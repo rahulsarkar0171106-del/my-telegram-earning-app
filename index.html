@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+
 <html>
   <head>
-    <title>Hello, World!</title>
+    <title>"আমার আর্নিং অ্যাপ"!</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-      <h1 class="title">Hello World! </h1>
+      <h1 class="title">"আমার আর্নিং অ্যাপ"! </h1>
       <p id="currentTime"></p>
       <script src="script.js"></script>
   </body>
@@ -175,7 +175,7 @@
     
     <div id="ad-viewer" class="ad-viewer-overlay">
         <div class="ad-header">
-            বিজ্ঞাপন দেখা হচ্ছে... (<span id="countdown-timer">20</span>s)
+            AD দেখা হচ্ছে... (<span id="countdown-timer">20</span>s)
         </div>
         <iframe id="ad-frame" src="" frameborder="0"></iframe> 
         <button id="ad-done-button" onclick="adFinished()" style="display:none;">বিজ্ঞাপন দেখা শেষ করুন এবং হোমে ফিরুন</button>
@@ -223,7 +223,8 @@
             }
         }
 
-        // স্বাগতম নোটিশ তৈরি ও প্রদর্শন
+        
+      // স্বাগতম নোটিশ তৈরি ও প্রদর্শন
         function showWelcomeNotice() {
             const noticeTitle = 'স্বাগতম! 🔥';
             const noticeMessage = 
@@ -355,7 +356,7 @@
                 
                 window.Telegram.WebApp.showPopup({
                     title: 'রেফার করুন',
-                    message: `আপনার রেফারেল লিঙ্ক: ${referralLink}\nলিঙ্কটি কপি করে বন্ধুদের সাথে শেয়ার করুন!`,
+                    message: `আপনার রেফারেল লিঙ্ক: $ https://t.me/mynewminer_bot}\nলিঙ্কটি কপি করে বন্ধুদের সাথে শেয়ার করুন!`,
                     buttons: [{ text: 'কপি করুন', id: 'copy' }, { text: 'বন্ধ', id: 'close' }]
                 }, function(id) {
                     if (id === 'copy') {
@@ -369,4 +370,5 @@
         }
     </script>
 </body>
+
 </html>
