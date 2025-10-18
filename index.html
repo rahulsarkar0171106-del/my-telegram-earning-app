@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +6,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
     <style>
-        /* ১. সাধারণ ডিজাইন এবং ডার্ক মোড (সম্পূর্ণ স্ক্রিনশট অনুযায়ী ঠিক আছে) */
+        /* ১. সাধারণ ডিজাইন এবং ডার্ক মোড */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
             background-color: #0d0d10 !important;
@@ -23,7 +22,7 @@
             margin: 0 auto;
         }
 
-        /* ২. ব্যালেন্স কার্ডের ডিজাইন (কার্ডের ডিজাইন ঠিক করার জন্য !important) */
+        /* ২. ব্যালেন্স কার্ডের ডিজাইন */
         .balance-card {
             background: linear-gradient(135deg, #4f31c7, #2c1a85) !important; 
             padding: 25px !important;
@@ -45,7 +44,7 @@
             letter-spacing: 1px !important;
         }
 
-        /* ৩. টাস্ক গ্রিড এবং কার্ডের ডিজাইন (গ্রিড লেআউট ঠিক করার জন্য !important) */
+        /* ৩. টাস্ক গ্রিড এবং কার্ডের ডিজাইন */
         .task-grid {
             display: grid !important;
             grid-template-columns: 1fr 1fr !important;
@@ -83,12 +82,54 @@
             font-size: 1.2em !important;
         }
 
-        /* ৬. বিজ্ঞাপন ভিউয়ার ওভারলে */
+        /* ⭐ ৬. বিজ্ঞাপন ভিউয়ার ওভারলে ঠিক করা (গুরুত্বপূর্ণ পরিবর্তন) ⭐ */
         .ad-viewer-overlay {
             position: fixed !important;
+            top: 0 !important; 
+            left: 0 !important; 
+            width: 100% !important;
+            height: 100vh !important; /* সম্পূর্ণ ভিউপোর্ট হাইট নিশ্চিত করা */
             background-color: #000000 !important;
+            z-index: 9999 !important; /* সবকিছুর উপরে আনার জন্য উচ্চ z-index */
             display: none; 
             flex-direction: column;
+            justify-content: flex-start; 
+        }
+
+        .ad-header {
+            width: 100%;
+            padding: 15px;
+            background-color: #2b2b2b;
+            color: white;
+            text-align: center;
+            font-size: 1.1em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box !important;
+        }
+
+        #ad-frame {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%; /* বাকি স্পেস নেওয়ার জন্য */
+            border: none;
+        }
+        
+        #ad-done-button {
+            width: 90%;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #4CAF50; 
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        #ad-done-button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -148,7 +189,7 @@
             if (window.Telegram && window.Telegram.WebApp) {
                 window.Telegram.WebApp.ready();
                 
-                // ⭐ মূল পরিবর্তন: TWA MainButton (নীচের "হোম" বাটন) লুকিয়ে ফেলা ⭐
+                // TWA MainButton (নীচের "হোম" বাটন) লুকিয়ে ফেলা
                 window.Telegram.WebApp.MainButton.hide();
 
                 // TWA ডার্ক থিম নিশ্চিত করা 
@@ -177,9 +218,6 @@
             }
         }
 
-        // বাকি ফাংশনগুলি আগের মতোই আছে... (startAdView, adFinished, rewardUser, startWithdrawal, shareReferral)
-        // ...
-        
         function showWelcomeNotice() {
             const noticeTitle = 'স্বাগতম! 🔥';
             const noticeMessage = 
@@ -202,6 +240,7 @@
             }
         }
 
+        // বিজ্ঞাপন দেখার প্রক্রিয়া শুরু করার ফাংশন
         function startAdView() {
             if (adsWatched >= totalAds) {
                 if (window.Telegram && window.Telegram.WebApp) {
@@ -214,7 +253,7 @@
             
             const adURL = "https://www.effectivegatecpm.com/q7m07sggj?key=0febc73b4772d20c71652935f8240078";
             
-            adViewer.style.display = 'flex';
+            adViewer.style.display = 'flex'; // ওভারলে দেখাও
             adFrame.src = adURL;
             adButton.disabled = true; 
 
